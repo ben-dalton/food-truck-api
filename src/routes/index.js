@@ -2,7 +2,7 @@ import express from 'express';
 import config from '../config';
 import middleware from '../middleware';
 import initializeDb from '../db';
-import { truckController } from '../controllers/';
+import { truckController, accountController } from '../controllers/';
 
 const routes = express();
 
@@ -13,6 +13,7 @@ initializeDb((db) => {
 
   // api routes v1 (/v1)
   routes.use('/trucks', truckController({ config, db }));
+  routes.use('/account', accountController(config, db));
 });
 
 export default routes;
