@@ -1,11 +1,12 @@
 import { Router } from 'express';
 import { Truck, Review } from '../models/';
+import { authenticate } from '../middleware/authMiddleware';
 
 export const truckController = ({ config, db }) => {
   const api = Router();
 
   // 'v1/trucks/add'
-  api.post('/add', (req, res) => {
+  api.post('/add', authenticate, (req, res) => {
     const newTruck = new Truck();
     newTruck.name = req.body.name;
     newTruck.foodType = req.body.foodType;
